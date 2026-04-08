@@ -1,0 +1,55 @@
+div#div1 {
+    text-align: center; /* Centra el contenido */
+}
+
+body { 
+    background-color: #19bbfc;   /* Es el color del fondo */
+    font-family: Arial, sans-serif; 
+}
+
+header {
+    background-color: #08222c;
+    color: white;
+    padding: 1px; /* Agrega espacio alrededor del texto */
+}
+
+h1 {
+    color: rgb(255, 255, 255);
+    font-size: 50px;   /* Es el tamaño del texto */
+    padding-right: 60px;
+}
+
+#parrafomain {
+    color: #000000;
+    font-size: 20px;
+}
+
+section {
+    background-color: #1b53ee;
+    padding: 20px;
+    width: 500px;   /* Es el ancho */
+    margin: 20px auto;  /* Lo centra horizontalmente */
+}
+
+section:hover {
+    background-color: #6087f1; /* Cambia el color cuando pasas el mouse */  
+}
+
+main {
+    background-color: #19bbfc;  
+    padding: 40px;
+    width: 500px;
+    margin: 0 auto;
+}
+
+footer {
+    background-color: #08222c;
+    color: white;
+    text-align: center;
+    padding: 10px;
+}
+
+img {
+    padding-top: 30px; /* Agrega espacio arriba de la imagen */
+}
+
