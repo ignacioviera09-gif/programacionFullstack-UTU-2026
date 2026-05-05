@@ -1,0 +1,195 @@
+body{
+    margin: 0;
+    padding: 0;
+    font-family: 'Josefin Sans', sans-serif;
+}
+
+.contenedor{
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+ header{
+    background-image: url("/ESCRITO/Escrito-1-Frontend-main/images/desktop/image-hero.jpg");
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    padding: 40px;
+ }
+ nav{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+ }
+
+.menu{
+    display: flex;
+    gap: 20px;
+    list-style: none;
+}
+
+.menu a{
+    text-decoration: none;
+    color: white;
+    font-size: 16px;
+}
+
+.header-text{
+    margin-top: 100px;
+    border: 2px solid white;
+    display: inline-block;
+    padding: 20px;
+}
+.header-text h1{
+    font-size: 70px;
+    letter-spacing: 3px;
+    color: white;
+}
+
+.seccion{
+    display: flex;
+    justify-content: center;
+}
+
+.interactive{
+    width: 80%;
+    height: auto;
+    padding: 100px;
+    padding-left: 20px;
+}
+
+.card-text{
+    max-width: 400px;
+    background-color: white;
+    position: absolute;
+    top : 170%;
+    left: 50%;
+    padding: 40px;
+}
+
+h3{
+    font-size: 40px;
+    letter-spacing: 2px;
+    margin-top: 0;
+}
+ p{
+    font-size: 16px;
+    color: #333;
+    line-height: 1.5;
+    margin-top: 20px;
+ }
+
+.linea{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-top: 60px;
+    padding-bottom: 50px;
+}
+
+.linea h2{
+    order: 1;
+    margin: 0;
+}
+
+.see-all{
+    order: 2;
+    display: inline-block;
+    padding: 10px 20px;
+    border: 2px solid black;
+    text-decoration: none;
+    color: black;
+    font-size: 16px;
+}
+
+h2{
+    font-size: 40px;
+    letter-spacing: 2px;
+}
+
+.secciones{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    width: 70%;
+    gap: 20px;
+    max-width: 1000px;
+    padding: 200px;
+    padding-top: 10px;
+    padding-bottom: 100px;
+}
+
+.secciones .card{
+    position: relative; 
+    overflow: hidden;
+}
+
+.secciones .card img{
+    width: 100%;
+    display: block;
+}
+
+.secciones .card h3{
+    position: absolute;
+    left: 20px;
+    bottom: 20px;
+    margin: 0;
+    color: white;
+    font-size: 24px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    z-index: 1;
+}
+.footer-text {
+  padding: 20px 190px;
+  background-color: #000000;
+  color: white;
+}
+
+.footer-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.logo-footer {
+  width: 160px;
+}
+
+.redes-sociales {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+.redes-sociales a img {
+  width: 24px;
+  height: 24px;
+}
+
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.menu-footer {
+  display: flex;
+  gap: 20px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.menu-footer a {
+  text-decoration: none;
+  color: white;
+  font-size: 16px;
+}
+
+.copyright {
+  color: hsl(0, 0%, 43%);
+  font-size: 15px;
+}
