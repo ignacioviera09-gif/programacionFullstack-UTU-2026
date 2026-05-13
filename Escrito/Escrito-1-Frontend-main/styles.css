@@ -90,13 +90,10 @@ h3{
 }
 
 .linea h2{
-    order: 1;
     margin: 0;
 }
 
 .see-all{
-    order: 2;
-    display: inline-block;
     padding: 10px 20px;
     border: 2px solid black;
     text-decoration: none;
@@ -122,7 +119,6 @@ h2{
 
 .secciones .card{
     position: relative; 
-    overflow: hidden;
 }
 
 .secciones .card img{
@@ -138,7 +134,6 @@ h2{
     color: white;
     font-size: 24px;
     letter-spacing: 2px;
-    text-transform: uppercase;
     z-index: 1;
 }
 .footer-text {
@@ -161,7 +156,6 @@ h2{
 .redes-sociales {
   display: flex;
   gap: 16px;
-  align-items: center;
 }
 
 .redes-sociales a img {
