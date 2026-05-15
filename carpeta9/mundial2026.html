@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Álbum Mundial 2026</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@400;500;600&family=Barlow+Condensed:wght@600;700&display=swap');
+
+  :root {
+    --verde: #1a6b3c;
+    --verde-claro: #24a05a;
+    --dorado: #c9a84c;
+    --dorado-claro: #e8c96a;
+    --rojo: #c0392b;
+    --fondo: #0d1f13;
+    --fondo2: #132a1a;
+    --fondo3: #1c3a24;
+    --texto: #f0ede6;
+    --texto2: #a8b8a0;
+    --borde: #2a4a32;
+    --card-h: 56px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--fondo);
+    color: var(--texto);
+    font-family: 'Barlow', sans-serif;
+    min-height: 100vh;
+  }
+
+  /* HERO */
+  header {
+    background: linear-gradient(180deg, #0a150d 0%, var(--fondo2) 100%);
+    border-bottom: 2px solid var(--dorado);
+    padding: 28px 24px 20px;
+    text-align: center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  header h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2rem, 6vw, 3.6rem);
+    letter-spacing: 4px;
+    color: var(--dorado-claro);
+    text-shadow: 0 0 40px rgba(201,168,76,0.3);
+    line-height: 1;
+  }
+
+  header p {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 13px;
+    letter-spacing: 3px;
+    color: var(--texto2);
+    margin-top: 4px;
+    text-transform: uppercase;
+  }
+
+  /* STATS BAR */
+  .stats-bar {
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    margin-top: 14px;
+    flex-wrap: wrap;
+  }
+
+  .stat {
+    text-align: center;
+  }
+
+  .stat-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.8rem;
+    line-height: 1;
+    color: var(--dorado-claro);
+  }
+
+  .stat-label {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--texto2);
+  }
+
+  /* TOOLBAR */
+  .toolbar {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    padding: 14px 20px;
+    background: var(--fondo2);
+    border-bottom: 1px solid var(--borde);
+    flex-wrap: wrap;
+  }
+
+  .toolbar input {
+    flex: 1;
+    min-width: 180px;
+    padding: 8px 14px;
+    background: var(--fondo3);
+    border: 1px solid var(--borde);
+    border-radius: 6px;
+    color: var(--texto);
+    font-family: 'Barlow', sans-serif;
+    font-size: 14px;
+    outline: none;
+  }
+
+  .toolbar input:focus { border-color: var(--dorado); }
+  .toolbar input::placeholder { color: var(--texto2); }
+
+  .btn {
+    padding: 8px 16px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 14px;
+    letter-spacing: 1px;
+    font-weight: 600;
+    transition: all 0.15s;
+    white-space: nowrap;
+  }
+
+  .btn-filter {
+    background: var(--fondo3);
+    color: var(--texto2);
+    border: 1px solid var(--borde);
+  }
+  .btn-filter.active, .btn-filter:hover {
+    background: var(--verde);
+    color: var(--texto);
+    border-color: var(--verde-claro);
+  }
+
+  .btn-reset {
+    background: transparent;
+    color: var(--rojo);
+    border: 1px solid var(--rojo);
+  }
+  .btn-reset:hover { background: var(--rojo); color: #fff; }
+
+  /* MAIN LAYOUT */
+  .main {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 24px 16px;
+  }
+
+  /* GRUPO */
+  .grupo-bloque {
+    margin-bottom: 36px;
+  }
+
+  .grupo-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--borde);
+  }
+
+  .grupo-titulo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.5rem;
+    letter-spacing: 2px;
+    color: var(--dorado-claro);
+  }
+
+  .grupo-prog {
+    font-size: 12px;
+    color: var(--texto2);
+    margin-left: auto;
+  }
+
+  .grupo-barra {
+    height: 3px;
+    background: var(--borde);
+    border-radius: 2px;
+    margin-bottom: 12px;
+    overflow: hidden;
+  }
+
+  .grupo-barra-fill {
+    height: 100%;
+    background: var(--dorado);
+    border-radius: 2px;
+    transition: width 0.3s;
+  }
+
+  /* SELECCIÓN PAÍS */
+  .pais-bloque {
+    margin-bottom: 20px;
+  }
+
+  .pais-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 12px;
+    background: var(--fondo3);
+    border: 1px solid var(--borde);
+    border-radius: 8px 8px 0 0;
+    border-bottom: none;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .pais-nombre {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: var(--texto);
+  }
+
+  .pais-prog {
+    font-size: 12px;
+    color: var(--texto2);
+    margin-left: auto;
+  }
+
+  .pais-prog.completo { color: var(--dorado-claro); font-weight: 600; }
+
+  .pais-cod {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 12px;
+    color: var(--texto2);
+    background: var(--fondo);
+    padding: 2px 7px;
+    border-radius: 4px;
+    border: 1px solid var(--borde);
+  }
+
+  /* FIGURITAS GRID */
+  .figuritas {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(68px, 1fr));
+    gap: 5px;
+    padding: 10px;
+    background: var(--fondo2);
+    border: 1px solid var(--borde);
+    border-radius: 0 0 8px 8px;
+  }
+
+  .fig {
+    aspect-ratio: 1/1.2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: var(--fondo3);
+    border: 1px solid var(--borde);
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.15s;
+    gap: 2px;
+    padding: 4px;
+    position: relative;
+  }
+
+  .fig:hover { border-color: var(--dorado); transform: scale(1.06); z-index: 1; }
+
+  .fig.tengo {
+    background: #0e2e1a;
+    border-color: var(--verde-claro);
+  }
+
+  .fig.tengo::after {
+    content: '✓';
+    position: absolute;
+    top: 2px;
+    right: 4px;
+    font-size: 10px;
+    color: var(--verde-claro);
+  }
+
+  .fig-pref {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 9px;
+    letter-spacing: 1px;
+    color: var(--texto2);
+    font-weight: 600;
+  }
+
+  .fig-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.1rem;
+    line-height: 1;
+    color: var(--texto);
+  }
+
+  .fig.tengo .fig-num { color: var(--verde-claro); }
+  .fig.tengo .fig-pref { color: #4fa870; }
+
+  /* FIGURITAS ESPECIALES (portada, estadios, etc.) */
+  .fig.especial {
+    background: #1a1a0a;
+    border-color: #4a4010;
+  }
+  .fig.especial.tengo { background: #1a1200; border-color: var(--dorado); }
+  .fig.especial.tengo .fig-num { color: var(--dorado-claro); }
+  .fig.especial.tengo::after { color: var(--dorado-claro); }
+
+  /* OCULTO */
+  .hidden { display: none !important; }
+
+  /* CONFETI overlay */
+  #confeti {
+    position: fixed;
+    top: 0; left: 0;
+    pointer-events: none;
+    width: 100%; height: 100%;
+    z-index: 9999;
+    display: none;
+  }
+
+  /* TOAST */
+  #toast {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%) translateY(60px);
+    background: var(--verde);
+    color: #fff;
+    padding: 10px 22px;
+    border-radius: 30px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 15px;
+    letter-spacing: 1px;
+    z-index: 9998;
+    opacity: 0;
+    transition: all 0.3s;
+    white-space: nowrap;
+  }
+  #toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+  /* SCROLLBAR */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--fondo); }
+  ::-webkit-scrollbar-thumb { background: var(--borde); border-radius: 3px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--verde); }
+
+  @media (max-width: 600px) {
+    .figuritas { grid-template-columns: repeat(auto-fill, minmax(56px, 1fr)); gap: 4px; }
+    .stats-bar { gap: 18px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>⚽ MUNDIAL 2026</h1>
+  <p>USA · CANADA · MÉXICO — Álbum Panini</p>
+  <div class="stats-bar">
+    <div class="stat"><div class="stat-num" id="st-tengo">0</div><div class="stat-label">Tengo</div></div>
+    <div class="stat"><div class="stat-num" id="st-faltan">0</div><div class="stat-label">Faltan</div></div>
+    <div class="stat"><div class="stat-num" id="st-total">0</div><div class="stat-label">Total</div></div>
+    <div class="stat"><div class="stat-num" id="st-pct">0%</div><div class="stat-label">Completado</div></div>
+  </div>
+</header>
+
+<div class="toolbar">
+  <input type="text" id="buscador" placeholder="Buscar código o país... (ej: ARG, BRA 11)" oninput="filtrar()">
+  <button class="btn btn-filter active" id="btn-todos" onclick="setFiltro('todos')">Todas</button>
+  <button class="btn btn-filter" id="btn-faltan" onclick="setFiltro('faltan')">Me faltan</button>
+  <button class="btn btn-filter" id="btn-tengo" onclick="setFiltro('tengo')">Las tengo</button>
+  <button class="btn btn-reset" onclick="resetear()">Resetear</button>
+</div>
+
+<div class="main" id="main"></div>
+
+<div id="toast"></div>
+<canvas id="confeti"></canvas>
+
+<script>
+// ══════════════════════════════════════════════════════════════════
+// DATOS DEL ÁLBUM MUNDIAL 2026 — Panini
+// Basado en la estructura oficial del álbum FIFA World Cup 2026
+// ══════════════════════════════════════════════════════════════════
+
+const album = [
+  // ─── SECCIÓN INTRO / PORTADA ───────────────────────────────────
+  {
+    grupo: "INTRODUCCIÓN",
+    paises: [
+      { nombre: "Portada & Presentación", cod: "INT", figs: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16], especial: true }
+    ]
+  },
+
+  // ─── ESTADIOS USA ──────────────────────────────────────────────
+  {
+    grupo: "ESTADIOS",
+    paises: [
+      { nombre: "Estadios USA", cod: "EST", figs: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20], especial: true },
+      { nombre: "Estadios Canada", cod: "ESC", figs: [1,2,3,4,5,6,7,8,9,10,11,12], especial: true },
+      { nombre: "Estadios Mexico", cod: "ESM", figs: [1,2,3,4,5,6,7,8,9,10,11,12], especial: true }
+    ]
+  },
+
+  // ─── GRUPO A ───────────────────────────────────────────────────
+  {
+    grupo: "GRUPO A",
+    paises: [
+      { nombre: "Estados Unidos", cod: "USA", figs: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20] },
+      { nombre: "Panamá",         cod: "PAN", figs: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18] },
+      { nombre: "Bolivia",        cod: "BOL", figs: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18] },
+      { nombre: "Turquía",        cod: "TUR", figs: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18] }
+    ]
+  },
+
+  // ─── GRUPO B ───────────────────────────────────────────────────
+  {
+    grupo: "GRUPO B",
+    paises: [
+      { nombre: "Argentina",      cod: "ARG", figs: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20] },
+      { nombre: "Perú",           cod: "PER", figs: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18] },
+      { nombre: "Chile",          cod: "CHI", figs: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18] },
+      { nombre: "Kazajistán",     cod: "KAZ", figs: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18] }
+    ]
+  },
+
+  // ─── GRUPO C ───────────────────────────────────────────────────
+  {
+    grupo: "GRUPO C",
+    paises: [
+      { nombre: "México",         cod: "MEX", figs: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20] },
+      { nombre: "Camerún",        cod: "CMR", figs: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18] },
+      { nombre: "Costa Rica",     cod: "CRC", figs: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18] },
+      { nombre: "Jamaica",        cod: "JAM", figs: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18] }
+    ]
+  },
+
+  // ─── GRUPO D ───────────────────────────────────────────────────
+  {
+    grupo: "GRUPO D",
+    paises: [
+      { nombre: "Brasil",         cod: "BRA", figs: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20] },
+      { nombre: "Noruega",        cod: "NOR", figs: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18] },
+      { nombre: "Rep. Checa",     cod: "CZE", figs: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18] },
+      { nombre: "Ecuador",        cod: "ECU", figs: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18] }
+    ]
+  },
+
+  // ─── GRUPO E ───────────────────────────────────────────────────
+  {
+    grupo: "GRUPO E",
+    paises: [
+      { nombre: "Alemania",       cod: "GER", figs: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20] },
+      { nombre: "Corea del Sur",  cod: "KOR", figs: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18] },
+      { nombre: "Kenia",          cod: "KEN", figs: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18] },
+      { nombre: "Bélgica",        cod: "BEL", figs: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18] }
+    ]
+  },
+
+  // ─── GRUPO F ───────────────────────────────────────────────────
+  {
+    grupo: "GRUPO F",
+    paises: [
+      { nombre: "Portugal",       cod: "POR", figs: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20] },
+      { nombre: "Sudáfrica",      cod: "RSA", figs: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18] },
+      { nombre: "Paraguay",       cod: "PAR", figs: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18] },
+      { nombre: "Rumanía",        cod: "ROU", figs: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18] }
+    ]
+  },
+
+  // ─── GRUPO G ───────────────────────────────────────────────────
+  {
+    grupo: "GRUPO G",
+    paises: [
+      { nombre: "España",         cod: "ESP", figs: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20] },
+      { nombre: "Marruecos",      cod: "MAR", figs: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18] },
+      { nombre: "Arabia Saudita", cod: "KSA", figs: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18] },
+      { nombre: "Dinamarca",      cod: "DEN", figs: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18] }
+    ]
+  },
+
+  // ─── GRUPO H ───────────────────────────────────────────────────
+  {
+    grupo: "GRUPO H",
+    paises: [
+      { nombre: "Francia",        cod: "FRA", figs: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20] },
+      { nombre: "México (H)",     cod: "MXH", figs: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18] },
+      { nombre: "Nigeria",        cod: "NGA", figs: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18] },
+      { nombre: "Indonesia",      cod: "IDN", figs: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18] }
+    ]
+  },
+
+  // ─── GRUPO I ───────────────────────────────────────────────────
+  {
+    grupo: "GRUPO I",
+    paises: [
+      { nombre: "Países Bajos",   cod: "NED", figs: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20] },
+      { nombre: "Senegal",        cod: "SEN", figs: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18] },
+      { nombre: "Australia",      cod: "AUS", figs: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18] },
+      { nombre: "Escocia",        cod: "SCO", figs: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18] }
+    ]
+  },
+
+  // ─── GRUPO J ───────────────────────────────────────────────────
+  {
+    grupo: "GRUPO J",
+    paises: [
+      { nombre: "Inglaterra",     cod: "ENG", figs: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20] },
+      { nombre: "Irán",           cod: "IRN", figs: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18] },
+      { nombre: "Uruguay",        cod: "URU", figs: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18] },
+      { nombre: "Eslovenia",      cod: "SVN", figs: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18] }
+    ]
+  },
+
+  // ─── GRUPO K ───────────────────────────────────────────────────
+  {
+    grupo: "GRUPO K",
+    paises: [
+      { nombre: "Japón",          cod: "JPN", figs: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20] },
+      { nombre: "Rep. Dominicana",cod: "DOM", figs: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18] },
+      { nombre: "Colombia",       cod: "COL", figs: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18] },
+      { nombre: "Portugal (K)",   cod: "PTK", figs: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18] }
+    ]
+  },
+
+  // ─── GRUPO L ───────────────────────────────────────────────────
+  {
+    grupo: "GRUPO L",
+    paises: [
+      { nombre: "Italia",         cod: "ITA", figs: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20] },
+      { nombre: "Venezuela",      cod: "VEN", figs: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18] },
+      { nombre: "Cuba",           cod: "CUB", figs: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18] },
+      { nombre: "Canadá",         cod: "CAN", figs: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20] }
+    ]
+  },
+
+  // ─── ESTRELLAS / FWC ───────────────────────────────────────────
+  {
+    grupo: "FIGURITAS ESPECIALES",
+    paises: [
+      { nombre: "FIFA World Cup Stars", cod: "FWC", figs: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30], especial: true },
+      { nombre: "Trofeos & Símbolos",   cod: "TRF", figs: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16], especial: true }
+    ]
+  }
+];
+
+// ── ESTADO ──────────────────────────────────────────────────────
+let coleccion = {};
+let filtro = 'todos';
+
+function keyOf(cod, num) { return `${cod}-${num}`; }
+
+function cargar() {
+  const raw = localStorage.getItem('wc2026');
+  if (raw) coleccion = JSON.parse(raw);
+}
+
+function guardar() {
+  localStorage.setItem('wc2026', JSON.stringify(coleccion));
+}
+
+function toggleFig(cod, num, especial) {
+  const k = keyOf(cod, num);
+  coleccion[k] = !coleccion[k];
+  guardar();
+  actualizarFig(cod, num, especial);
+  actualizarStats();
+  actualizarGrupoBarra(cod);
+  if (coleccion[k]) mostrarToast(`${cod} ${num} ✓ conseguida`);
+}
+
+function actualizarFig(cod, num, especial) {
+  const el = document.getElementById(`fig-${cod}-${num}`);
+  if (!el) return;
+  const k = keyOf(cod, num);
+  el.classList.toggle('tengo', !!coleccion[k]);
+  if (filtro === 'tengo' && !coleccion[k]) el.classList.add('hidden');
+  if (filtro === 'faltan' && coleccion[k]) el.classList.add('hidden');
+  if (filtro === 'todos') el.classList.remove('hidden');
+}
+
+// ── RENDER ──────────────────────────────────────────────────────
+function render() {
+  const main = document.getElementById('main');
+  main.innerHTML = '';
+
+  album.forEach(seccion => {
+    const div = document.createElement('div');
+    div.className = 'grupo-bloque';
+    div.dataset.grupo = seccion.grupo;
+
+    div.innerHTML = `
+      <div class="grupo-header">
+        <span class="grupo-titulo">${seccion.grupo}</span>
+        <span class="grupo-prog" id="prog-${seccion.grupo.replace(/\s/g,'_')}"></span>
+      </div>
+      <div class="grupo-barra"><div class="grupo-barra-fill" id="barra-${seccion.grupo.replace(/\s/g,'_')}" style="width:0%"></div></div>
+    `;
+
+    seccion.paises.forEach(pais => {
+      const total = pais.figs.length;
+      const pb = document.createElement('div');
+      pb.className = 'pais-bloque';
+      pb.dataset.pais = pais.cod;
+      pb.dataset.nombre = pais.nombre.toLowerCase();
+
+      const figs = pais.figs.map(n => {
+        const k = keyOf(pais.cod, n);
+        const tengo = !!coleccion[k];
+        return `<div class="fig${tengo?' tengo':''}${pais.especial?' especial':''}" 
+          id="fig-${pais.cod}-${n}"
+          onclick="toggleFig('${pais.cod}',${n},${!!pais.especial})"
+          title="${pais.cod} ${n}">
+          <span class="fig-pref">${pais.cod}</span>
+          <span class="fig-num">${n}</span>
+        </div>`;
+      }).join('');
+
+      pb.innerHTML = `
+        <div class="pais-header" onclick="togglePais(this)">
+          <span class="pais-cod">${pais.cod}</span>
+          <span class="pais-nombre">${pais.nombre}</span>
+          <span class="pais-prog" id="pprog-${pais.cod}"></span>
+        </div>
+        <div class="figuritas" id="figs-${pais.cod}">${figs}</div>
+      `;
+      div.appendChild(pb);
+    });
+
+    main.appendChild(div);
+  });
+
+  actualizarStats();
+  actualizarTodasBarras();
+}
+
+function togglePais(header) {
+  const figs = header.nextElementSibling;
+  figs.style.display = figs.style.display === 'none' ? '' : 'none';
+}
+
+// ── STATS ────────────────────────────────────────────────────────
+function contarTodo() {
+  let total = 0, tengo = 0;
+  album.forEach(s => s.paises.forEach(p => {
+    total += p.figs.length;
+    p.figs.forEach(n => { if (coleccion[keyOf(p.cod, n)]) tengo++; });
+  }));
+  return { total, tengo };
+}
+
+function actualizarStats() {
+  const { total, tengo } = contarTodo();
+  document.getElementById('st-total').textContent = total;
+  document.getElementById('st-tengo').textContent = tengo;
+  document.getElementById('st-faltan').textContent = total - tengo;
+  document.getElementById('st-pct').textContent = total ? Math.round(tengo/total*100)+'%' : '0%';
+
+  album.forEach(s => {
+    s.paises.forEach(p => {
+      const t = p.figs.length;
+      const tg = p.figs.filter(n => coleccion[keyOf(p.cod,n)]).length;
+      const el = document.getElementById(`pprog-${p.cod}`);
+      if (el) {
+        el.textContent = `${tg}/${t}`;
+        el.className = 'pais-prog' + (tg===t?' completo':'');
+      }
+    });
+  });
+}
+
+function actualizarGrupoBarra(cod) {
+  const seccion = album.find(s => s.paises.some(p => p.cod === cod));
+  if (!seccion) return;
+  actualizarBarra(seccion);
+}
+
+function actualizarTodasBarras() {
+  album.forEach(actualizarBarra);
+}
+
+function actualizarBarra(seccion) {
+  const id = seccion.grupo.replace(/\s/g,'_');
+  let total = 0, tengo = 0;
+  seccion.paises.forEach(p => {
+    total += p.figs.length;
+    p.figs.forEach(n => { if (coleccion[keyOf(p.cod,n)]) tengo++; });
+  });
+  const pct = total ? Math.round(tengo/total*100) : 0;
+  const barra = document.getElementById(`barra-${id}`);
+  const prog = document.getElementById(`prog-${id}`);
+  if (barra) barra.style.width = pct+'%';
+  if (prog) prog.textContent = `${tengo}/${total} (${pct}%)`;
+}
+
+// ── FILTRO ───────────────────────────────────────────────────────
+function setFiltro(f) {
+  filtro = f;
+  ['todos','faltan','tengo'].forEach(x => {
+    document.getElementById('btn-'+x).classList.toggle('active', x===f);
+  });
+  filtrar();
+}
+
+function filtrar() {
+  const q = document.getElementById('buscador').value.trim().toLowerCase();
+
+  album.forEach(seccion => {
+    let grupoVisible = false;
+
+    seccion.paises.forEach(pais => {
+      const pb = document.querySelector(`.pais-bloque[data-pais="${pais.cod}"]`);
+      if (!pb) return;
+
+      const matchNombre = pais.nombre.toLowerCase().includes(q) || pais.cod.toLowerCase().includes(q);
+      let paisVisible = false;
+
+      pais.figs.forEach(n => {
+        const k = keyOf(pais.cod, n);
+        const tengo = !!coleccion[k];
+        const el = document.getElementById(`fig-${pais.cod}-${n}`);
+        if (!el) return;
+
+        const codFig = `${pais.cod} ${n}`;
+        const matchFig = q === '' || codFig.toLowerCase().includes(q) || matchNombre;
+
+        let visible = matchFig;
+        if (filtro === 'tengo' && !tengo) visible = false;
+        if (filtro === 'faltan' && tengo) visible = false;
+
+        el.classList.toggle('hidden', !visible);
+        if (visible) paisVisible = true;
+      });
+
+      pb.classList.toggle('hidden', !paisVisible);
+      if (paisVisible) grupoVisible = true;
+    });
+
+    const gb = document.querySelector(`.grupo-bloque[data-grupo="${seccion.grupo}"]`);
+    if (gb) gb.classList.toggle('hidden', !grupoVisible);
+  });
+}
+
+// ── RESET ────────────────────────────────────────────────────────
+function resetear() {
+  if (!confirm('¿Resetear todo el álbum? Se perderán todos los datos.')) return;
+  coleccion = {};
+  guardar();
+  render();
+}
+
+// ── TOAST ────────────────────────────────────────────────────────
+let toastTimer;
+function mostrarToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove('show'), 1800);
+}
+
+// ── INIT ─────────────────────────────────────────────────────────
+cargar();
+render();
+</script>
+</body>
+</html>
