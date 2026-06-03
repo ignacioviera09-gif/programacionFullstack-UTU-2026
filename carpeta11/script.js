@@ -18,7 +18,7 @@ let imagen = document.getElementById("imagen");
 let btnImagen = document.getElementById("btnImagen");
 
 btnImagen.addEventListener("click", function () {
-    imagen.src = "/carpeta 11/Oro.webp";
+    imagen.src = "/carpeta11/Oro.webp";
 });
 
 

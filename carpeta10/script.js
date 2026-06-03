@@ -1,6 +1,6 @@
-console.log("Hola, mundo!");
+console.log("Hola mundo");
 
-let nombre = prompt("¿Cuál es tu nombre?");
+let nombre = prompt("Cuál es tu nombre?");
 console.log("Hola " + nombre);
 
 let numero1 = parseInt(prompt("Ingresa el primer número:"));
@@ -8,7 +8,7 @@ let numero2 = parseInt(prompt("Ingresa el segundo número:"));
 let suma = numero1 + numero2;
 console.log("La suma de " + numero1 + " y " + numero2 + " es: " + suma);
 
-let edad = parseInt(prompt("¿Cuántos años tienes?"));
+let edad = parseInt(prompt("Cuántos años tienes?"));
 if (edad >= 18) {
     console.log("es mayor.");
 } else {
@@ -101,7 +101,7 @@ console.log("mini menu");
 let opcion = prompt("Selecciona una opción: 1. saludar, 2. mostrar fecha, 3. numero random");
 switch (opcion) {
     case "1":
-        console.log("¡Hola, mundo!");
+        console.log("Hola mundo");
         break;
     case "2":
         console.log("La fecha de hoy es: " + new Date().toLocaleDateString());

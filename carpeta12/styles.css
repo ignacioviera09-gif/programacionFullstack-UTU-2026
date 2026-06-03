@@ -1,0 +1,12 @@
+body{
+    text-align: center;
+}
+
+.completada{
+    text-decoration: line-through;
+    color: gray;
+}
+
+#error{
+    color: red;
+}
