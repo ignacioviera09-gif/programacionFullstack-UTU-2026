@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>JokeAPI</title>
+</head>
+<body>
+
+    <h1>Generador de Chistes</h1>
+
+    <label for="categoria">Categoría:</label>
+    <select id="categoria">
+        <option value="Any">Any</option>
+        <option value="Programming">Programming</option>
+        <option value="Misc">Misc</option>
+        <option value="Pun">Pun</option>
+        <option value="Spooky">Spooky</option>
+        <option value="Christmas">Christmas</option>
+    </select>
+
+    <label for="tipo">Tipo:</label>
+    <select id="tipo">
+        <option value="single">Single</option>
+        <option value="twopart">Two Part</option>
+    </select>
+
+    <button id="btnChiste">Traer chiste</button>
+
+    <p id="chiste"></p>
+    <p id="error"></p>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
